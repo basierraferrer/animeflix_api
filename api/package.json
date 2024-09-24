@@ -1,0 +1,28 @@
+{
+  "name": "web-scrapper-api",
+  "version": "1.0.0",
+  "description": "This is to create an API to web scrapper",
+  "main": "index.ts",
+  "author": "Brian Sierra <basierraferrer@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "puppeteer": "^23.1.1",
+    "uuid": "^10.0.0"
+  },
+  "scripts": {
+    "build" : "tsc",
+    "start": "ts-node-dev index.ts"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.6.1",
+    "nodemon": "^3.1.4",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.2"
+  }
+}
