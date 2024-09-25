@@ -15,7 +15,8 @@
   },
   "scripts": {
     "build" : "tsc",
-    "start": "ts-node-dev index.ts"
+    "clean:install": "rm -rf node_modules && yarn install",
+    "dev": "ts-node-dev index.ts"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
