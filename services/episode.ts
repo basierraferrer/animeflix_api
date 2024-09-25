@@ -76,7 +76,6 @@ export  class EpisodeService {
         try{
           await newPage.goto(srcUrl);
           const timerData = await this.getTimerFromUrl(newPage, title);    
-          console.log("**__** ~ EpisodeService ~ getUrlData ~ timerData:", timerData)
           return {
             url: srcUrl,
             timer: timerData
@@ -132,7 +131,6 @@ export  class EpisodeService {
       }
 
       async getEpisodeData(episode:string){
-        console.log("**__** ~ EpisodeService ~ getEpisodeData ~ episode:", episode);
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
         await page.goto(`https://www3.animeflv.net/ver/detective-conan-${episode}`);
