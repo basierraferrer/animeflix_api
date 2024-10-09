@@ -6,5 +6,5 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
-    - name: Echo
-      run: echo "Hello World"
+    - name: Install dependencies
+      run: yarn clean:install
