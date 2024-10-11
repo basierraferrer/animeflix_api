@@ -11,6 +11,12 @@ jobs:
   dependencies:
     runs-on: ubuntu-20.04
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4.2.1
+    - name: Prepare env
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: '.nvmrc'
     - name: Install dependencies
       run: yarn clean:install
 
@@ -18,5 +24,7 @@ jobs:
     runs-on: ubuntu-20.04
     needs: dependencies
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4.2.1
     - name: Build app
       run: echo "Compilación exitosa"
