@@ -4,8 +4,6 @@ description: "Action que permitirá configurar el entorno de compilación de la 
 runs:
   using: composite
   steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4.2.1
     - name: Prepare env
       uses: actions/setup-node@v4
       with:

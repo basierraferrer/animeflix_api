@@ -11,6 +11,8 @@ jobs:
   dependencies:
     runs-on: ubuntu-20.04
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4.2.1
     - name: Prepare env
       uses: ./.github/actions/prepare
     - name: Install dependencies
