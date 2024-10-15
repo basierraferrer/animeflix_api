@@ -21,12 +21,6 @@ jobs:
     
     - name: Install dependencies
       run: yarn clean:install
-    
-    #- name: Artifacts
-      #uses: actions/upload-artifact@v4.4.3
-      #with: 
-        #name: artifact
-        #path: node_modules
 
   build:
     runs-on: ubuntu-20.04
