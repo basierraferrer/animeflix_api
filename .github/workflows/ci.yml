@@ -8,7 +8,7 @@ on:
       - main
       
 jobs:
-  dependencies:
+  build:
     runs-on: ubuntu-20.04
     steps:
     - name: Checkout repository
@@ -22,11 +22,5 @@ jobs:
     - name: Install dependencies
       run: yarn clean:install
 
-  build:
-    runs-on: ubuntu-20.04
-    needs: dependencies
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4.2.1
-    - name: Build app
-      run: echo "Compilación exitosa"
+    - name: Build App
+      run: npm run build
