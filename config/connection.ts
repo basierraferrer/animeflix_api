@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 process.loadEnvFile();
 // connection string
 const connectionURI =
-  process.env.MONGO_LOCAL ?? 'mongodb://localhost:27017/animeflix';
+  process.env.DB_URI ?? 'mongodb://localhost:27017/animeflix';
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const connectDB = async () => {
