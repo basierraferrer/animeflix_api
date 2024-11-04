@@ -1,10 +1,8 @@
-import {getAnimeEpisode} from '../controllers/controller'
-
-import express from "express";
+import express from 'express';
+import {episodesRoutes} from './episodesRoutes';
 
 const routes = express.Router();
 
+routes.use('/episodes', episodesRoutes);
 
-routes.get('/:id', getAnimeEpisode);
-
-export {routes}
+export {routes};
