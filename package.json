@@ -19,7 +19,8 @@
     "clean:install": "rm -rf node_modules && yarn install",
     "dev": "ts-node-dev index.ts",
     "prettier:check": "prettier . --check",
-    "prettier:write": "prettier . --write"
+    "prettier:write": "prettier . --write",
+    "seed": "npx ts-node config/seed"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
