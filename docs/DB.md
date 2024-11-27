@@ -87,7 +87,7 @@ Una vez se tenga la conexion ejecutaremos el seed para crear la DB localmente pa
 5. Crea un archivo `.env`usando el `.env.template` y reemplaza el valor de DB_URI
 
 ```text
-mongodb://dev_1:Kireti2024@127.0.0.1:27017/
+mongodb://dev_1:Kireti2024@127.0.0.1:27017/animeflix
 ```
 
 #### Initial data
