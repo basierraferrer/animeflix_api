@@ -4,9 +4,9 @@ import {getTimerSelector, getTimerMilliseconds} from '../utils/timer';
 import {PLAYER} from '../utils/constants';
 
 interface EpisodeProps {
-  title: string;
-  url: string;
-  timer: number;
+  episode: number;
+  playerUrl: string;
+  duration: number;
 }
 
 interface LiNavDataProps {
@@ -15,8 +15,8 @@ interface LiNavDataProps {
 }
 
 interface UrlFromOptionProps {
-  url: string;
-  timer: number;
+  playerUrl: string;
+  duration: number;
 }
 
 export class EpisodeService {
@@ -68,6 +68,7 @@ export class EpisodeService {
   }
 
   private async getTimerFromUrl(page: Page, title: string) {
+    console.log('🚀 ~ EpisodeService ~ getTimerFromUrl ~ params:', title);
     try {
       const timerSelector = getTimerSelector(title);
       const timerTextHTML = await page.$eval(
@@ -77,26 +78,30 @@ export class EpisodeService {
       const totalMilliseconds = getTimerMilliseconds(timerTextHTML, title);
       return totalMilliseconds;
     } catch (error) {
-      return undefined;
+      throw error;
     }
   }
 
   private async getUrlData(srcUrl: string, title: string) {
     const newPage = await this.getPage();
     try {
+      console.log('🚀 ~ EpisodeService ~ getUrlData ~ getUrlData:', title);
       await newPage.goto(srcUrl);
       const timerData = await this.getTimerFromUrl(newPage, title);
+      if (!timerData) throw new Error(`No se econtro duración para ${title}`);
       return {
-        url: srcUrl,
-        timer: timerData,
+        playerUrl: srcUrl,
+        duration: timerData,
       };
     } catch (error) {
+      console.log('🚀 ~ EpisodeService ~ getUrlData ~ error:', error);
       return undefined;
     }
   }
 
   private async getUrlFromOption(page: Page, item: LiNavDataProps) {
     try {
+      console.log('🚀 ~ EpisodeService ~ getUrlFromOption ~ params:', item);
       await page.$eval(`li[data-id="${item.id}"]`, el => el.click());
       const srcUrl = await page.$eval(
         '#video_box iframe',
@@ -105,6 +110,7 @@ export class EpisodeService {
       const urlData = await this.getUrlData(srcUrl, item.title);
       return urlData as UrlFromOptionProps;
     } catch (error) {
+      console.log('🚀 ~ EpisodeService ~ getUrlFromOption ~ error:', error);
       return undefined;
     }
   }
@@ -114,7 +120,13 @@ export class EpisodeService {
     values: LiNavDataProps[],
     index: number[],
   ): Promise<UrlFromOptionProps | undefined> {
+    console.log('🚀 ~ EpisodeService ~ recursiveMapData ~ params', {
+      values,
+      index: index[0],
+    });
+
     let dataFromOption: UrlFromOptionProps | undefined;
+
     if (index[0] > values.length) {
       return undefined;
     }
@@ -147,6 +159,10 @@ export class EpisodeService {
   }
 
   async getEpisodeData(episode: string) {
+    console.log(
+      '🚀 ~ EpisodeService ~ getEpisodeData ~ getEpisodeData:',
+      episode,
+    );
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(`https://www3.animeflv.net/ver/detective-conan-${episode}`);
@@ -154,6 +170,6 @@ export class EpisodeService {
     const liElements = this.getLiElements(tabListHTML);
     const urlAndDuration = await this.getUrlAndDuration(page, liElements);
 
-    return {title: `Episode ${episode}`, ...urlAndDuration} as EpisodeProps;
+    return {episode: Number(episode), ...urlAndDuration} as EpisodeProps;
   }
 }

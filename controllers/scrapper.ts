@@ -6,7 +6,7 @@ import {scrapperAnimeEpisodeData} from '../services/main';
  * @param req
  * @param res
  */
-export const getAnimeEpisode = async (req: Request, res: Response) => {
+const getAnimeEpisode = async (req: Request, res: Response) => {
   try {
     const episode: string = req.params.id;
     const data = await scrapperAnimeEpisodeData(episode);
@@ -15,4 +15,8 @@ export const getAnimeEpisode = async (req: Request, res: Response) => {
     console.error(error);
     res.status(500).json({error: 'Error al obtener los datos del anime'});
   }
+};
+
+export default {
+  getAnimeEpisode,
 };
