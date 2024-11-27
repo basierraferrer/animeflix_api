@@ -16,6 +16,24 @@ const getAllEpisodesByAnimeId = async (req: Request, res: Response) => {
   }
 };
 
+const insertEpisode = async (req: Request, res: Response) => {
+  try {
+    const animeId = req.params.animeId;
+    const episodeData = req.body;
+    const savedEpisode = await episodeService.addNewEpisode(
+      animeId,
+      episodeData,
+    );
+    res
+      .status(201)
+      .json({message: 'Episodio creado con éxito.', episode: savedEpisode});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({error: 'Error al insertar episodio'});
+  }
+};
+
 export default {
   getAllEpisodesByAnimeId,
+  insertEpisode,
 };

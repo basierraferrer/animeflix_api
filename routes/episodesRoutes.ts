@@ -3,7 +3,11 @@ import episodeController from '../controllers/episode';
 
 const episodesRoutes = express.Router();
 
-// scrapper method
-episodesRoutes.get('/:animeId', episodeController.getAllEpisodesByAnimeId);
+episodesRoutes.get(
+  '/:animeId/episodes',
+  episodeController.getAllEpisodesByAnimeId,
+);
+
+episodesRoutes.post('/:animeId/episodes', episodeController.insertEpisode);
 
 export {episodesRoutes};

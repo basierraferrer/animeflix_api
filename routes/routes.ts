@@ -4,7 +4,7 @@ import {scrapperRoutes} from './scrapEpisodeRoute';
 
 const routes = express.Router();
 
-routes.use('/episodes', episodesRoutes);
+routes.use('/animes', episodesRoutes);
 routes.use('/scraping', scrapperRoutes);
 
 export {routes};
