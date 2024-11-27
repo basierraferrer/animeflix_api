@@ -1,10 +1,10 @@
 name: Animeflix prepare env
-description: "Action que permitirá configurar el entorno de compilación de la app"
+description: 'Action que permitirá configurar el entorno de compilación de la app'
 
 inputs:
   filepath-version:
     required: true
-    description: "Ruta y archivo a utilizar para definir la versión"
+    description: 'Ruta y archivo a utilizar para definir la versión'
     default: '.nvmrc'
 
 runs:
@@ -13,4 +13,4 @@ runs:
     - name: Prepare env
       uses: actions/setup-node@v4
       with:
-        node-version-file: "${{ inputs.filepath-version }}"
+        node-version-file: '${{ inputs.filepath-version }}'

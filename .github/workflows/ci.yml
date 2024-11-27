@@ -6,21 +6,21 @@ on:
   pull_request:
     branches:
       - main
-      
+
 jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4.2.1
-    
-    - name: Prepare env
-      uses: ./.github/actions/prepare
-      with:
-        filepath-version: '.nvmrc'
-    
-    - name: Install dependencies
-      run: yarn clean:install
+      - name: Checkout repository
+        uses: actions/checkout@v4.2.1
 
-    - name: Build App
-      run: npm run build
+      - name: Prepare env
+        uses: ./.github/actions/prepare
+        with:
+          filepath-version: '.nvmrc'
+
+      - name: Install dependencies
+        run: yarn clean:install
+
+      - name: Build App
+        run: npm run build
