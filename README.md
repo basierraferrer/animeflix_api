@@ -24,6 +24,10 @@ This is a custom API for AnimeFLV to watch anime.
 
 4. Check `http://localhost:3100`;
 
+## DB conection
+
+[Read more](./docs/DB.md)
+
 ## Endpoints de la API
 
 - Animes:
