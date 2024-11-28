@@ -1,6 +1,6 @@
 # Animeflix API
 
-This is a custom API for AnimeFLV to watch anime.
+This is a custom API to do scrapper and watch anime.
 
 ## Get started
 
