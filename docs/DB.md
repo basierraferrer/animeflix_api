@@ -106,3 +106,5 @@ Seeding completado con éxito
 Para ver la data en MongoDB View en la seccion de _CONNECTIONS_ en donde aparece tu conexion local das click derecho y seleccione la opción refresh 🔄 y en cada coleccion deberias ver el documento insertado con el seed.
 
 Ya con esto puedes empezar a trabajar en tu local.
+
+[Volver](../README.md)
