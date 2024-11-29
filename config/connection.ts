@@ -9,6 +9,7 @@ const connectionURI =
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const connectDB = async () => {
   try {
+    console.log('Connecting to MongoDB');
     const client = await mongoose.connect(connectionURI);
     console.log('connectDB, Connected to MongoDB');
     return client;
