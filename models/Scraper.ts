@@ -1,13 +1,7 @@
-import puppeteer, {Browser, Page, Puppeteer} from 'puppeteer';
+import puppeteer, {Browser, Page} from 'puppeteer';
 import * as cheerio from 'cheerio';
-import {getTimerSelector, getTimerMilliseconds} from '../utils/timer';
-import {PLAYER} from '../utils/constants';
-
-interface EpisodeProps {
-  episode: number;
-  playerUrl: string;
-  duration: number;
-}
+import {getTimerSelector, getTimerMilliseconds, PLAYER} from '../utils';
+import {EpisodeProps} from '../types';
 
 interface LiNavDataProps {
   id: number;
@@ -19,7 +13,7 @@ interface UrlFromOptionProps {
   duration: number;
 }
 
-export class EpisodeService {
+export class ScrapperData {
   private _browser: Browser | undefined;
 
   constructor() {
@@ -166,6 +160,17 @@ export class EpisodeService {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.goto(`https://www3.animeflv.net/ver/detective-conan-${episode}`);
+    const tabListHTML = await this.getTabListHTML(page);
+    const liElements = this.getLiElements(tabListHTML);
+    const urlAndDuration = await this.getUrlAndDuration(page, liElements);
+
+    return {episode: Number(episode), ...urlAndDuration} as EpisodeProps;
+  }
+
+  async getEpisodeOfAnime(episode: string, animeName: string) {
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+    await page.goto(`https://www3.animeflv.net/ver/${animeName}-${episode}`);
     const tabListHTML = await this.getTabListHTML(page);
     const liElements = this.getLiElements(tabListHTML);
     const urlAndDuration = await this.getUrlAndDuration(page, liElements);

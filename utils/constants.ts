@@ -7,3 +7,5 @@ export const PLAYER = {
   NETU: 'Netu',
   STAPE: 'Stape',
 };
+
+export const REGEX_EPISODE = /^[0-9,$]*$/;

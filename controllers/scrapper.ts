@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {scrapperAnimeEpisodeData} from '../services/main';
+import {scrapperService} from '../services';
 
 /**
  * Scrapper
@@ -9,7 +9,7 @@ import {scrapperAnimeEpisodeData} from '../services/main';
 const getAnimeEpisode = async (req: Request, res: Response) => {
   try {
     const episode: string = req.params.id;
-    const data = await scrapperAnimeEpisodeData(episode);
+    const data = await scrapperService.scrapperAnimeEpisodeData(episode);
     res.json(data);
   } catch (error) {
     console.error(error);
