@@ -1,29 +1,18 @@
-import puppeteer, {Browser, Page, Puppeteer} from 'puppeteer';
+import puppeteer, {Browser, Page} from 'puppeteer';
 import * as cheerio from 'cheerio';
 import {getTimerSelector, getTimerMilliseconds} from '../utils/timer';
 import {PLAYER} from '../utils/constants';
-
-interface EpisodeProps {
-  title: string;
-  url: string;
-  timer: number;
-}
+import {EpisodeProps, ScrapperUrlFromOption} from '../types';
 
 interface LiNavDataProps {
   id: number;
   title: string;
 }
 
-interface UrlFromOptionProps {
-  url: string;
-  timer: number;
-}
-
-export class EpisodeService {
+class Scrapper {
   private _browser: Browser | undefined;
 
   constructor() {
-    // this._episode = episode;
     this.init();
   }
 
@@ -77,7 +66,7 @@ export class EpisodeService {
       const totalMilliseconds = getTimerMilliseconds(timerTextHTML, title);
       return totalMilliseconds;
     } catch (error) {
-      return undefined;
+      return 0;
     }
   }
 
@@ -87,8 +76,8 @@ export class EpisodeService {
       await newPage.goto(srcUrl);
       const timerData = await this.getTimerFromUrl(newPage, title);
       return {
-        url: srcUrl,
-        timer: timerData,
+        playerUrl: srcUrl,
+        duration: timerData,
       };
     } catch (error) {
       return undefined;
@@ -103,7 +92,7 @@ export class EpisodeService {
         el => el.getAttribute('src') as string,
       );
       const urlData = await this.getUrlData(srcUrl, item.title);
-      return urlData as UrlFromOptionProps;
+      return urlData;
     } catch (error) {
       return undefined;
     }
@@ -113,8 +102,8 @@ export class EpisodeService {
     page: Page,
     values: LiNavDataProps[],
     index: number[],
-  ): Promise<UrlFromOptionProps | undefined> {
-    let dataFromOption: UrlFromOptionProps | undefined;
+  ): Promise<ScrapperUrlFromOption | undefined> {
+    let dataFromOption: ScrapperUrlFromOption | undefined;
     if (index[0] > values.length) {
       return undefined;
     }
@@ -154,6 +143,8 @@ export class EpisodeService {
     const liElements = this.getLiElements(tabListHTML);
     const urlAndDuration = await this.getUrlAndDuration(page, liElements);
 
-    return {title: `Episode ${episode}`, ...urlAndDuration} as EpisodeProps;
+    return {episode, ...urlAndDuration} as EpisodeProps;
   }
 }
+
+export default new Scrapper();
