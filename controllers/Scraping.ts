@@ -1,10 +1,7 @@
 import {Request, Response} from 'express';
 import ScrapperServices from '../services/Scrapper';
 
-export const getAnimeEpisode = async (
-  req: Request,
-  res: Response,
-): Promise<void> => {
+const getAnimeEpisode = async (req: Request, res: Response): Promise<void> => {
   try {
     const episode: string = req.params.id;
     const data = await ScrapperServices.scrapperAnimeEpisodeData(episode);
@@ -13,4 +10,8 @@ export const getAnimeEpisode = async (
     console.error(error);
     res.status(500).json({error: 'Error al obtener los datos del anime'});
   }
+};
+
+export default {
+  getAnimeEpisode,
 };

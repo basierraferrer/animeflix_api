@@ -1,10 +1,9 @@
-import {getAnimeEpisode} from '../controllers/controller'
+import {ScrapingController} from '../controllers';
 
-import express from "express";
+import express from 'express';
 
 const routes = express.Router();
 
+routes.get('/:id', ScrapingController.getAnimeEpisode);
 
-routes.get('/:id', getAnimeEpisode);
-
-export {routes}
+export {routes};
