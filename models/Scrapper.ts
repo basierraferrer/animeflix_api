@@ -9,7 +9,7 @@ interface LiNavDataProps {
   title: string;
 }
 
-export class Scrapper {
+class Scrapper {
   private _browser: Browser | undefined;
 
   constructor() {
@@ -146,3 +146,5 @@ export class Scrapper {
     return {episode, ...urlAndDuration} as EpisodeProps;
   }
 }
+
+export default new Scrapper();

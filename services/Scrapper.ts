@@ -1,9 +1,8 @@
-import {Scrapper} from '../models/Scrapper';
+import {Scrapper} from '../models';
 
 async function scrapperAnimeEpisodeData(episode: string) {
-  const scrapperClass = new Scrapper();
-  const animeData = await scrapperClass.getEpisodeData(episode);
-  await scrapperClass.closeBrowser();
+  const animeData = await Scrapper.getEpisodeData(episode);
+  await Scrapper.closeBrowser();
 
   return animeData;
 }

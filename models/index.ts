@@ -1,5 +1,4 @@
-import Anime from './Anime';
-import Episode from './Episode';
-import User from './User';
-
-export {Anime, Episode, User};
+export {default as Anime} from './Anime';
+export {default as Episode} from './Episode';
+export {default as User} from './User';
+export {default as Scrapper} from './Scrapper';
