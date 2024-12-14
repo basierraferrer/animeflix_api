@@ -1,0 +1,15 @@
+meta {
+  name: get all anime episodes
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:3100/api/animes/:animeId/episodes
+  body: none
+  auth: none
+}
+
+params:path {
+  animeId: 674675eb66e3507444944634
+}

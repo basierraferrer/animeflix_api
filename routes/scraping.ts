@@ -6,4 +6,4 @@ const scrapingRoutes = express.Router();
 
 scrapingRoutes.get('/:id', ScrapingController.getAnimeEpisode);
 
-export default scrapingRoutes;
+export {scrapingRoutes};
