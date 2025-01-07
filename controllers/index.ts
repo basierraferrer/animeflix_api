@@ -1,2 +1,2 @@
-export {default as ScrapingController} from './Scraping';
-export {default as EpisodeController} from './Episodes';
+export {default as ScrapingController} from './scraping';
+export {default as EpisodeController} from './episodes';
