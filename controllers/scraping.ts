@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import ScrapperServices from '../services/Scrapper';
+import {ScrapperServices} from '../services';
 
 const getAnimeEpisode = async (req: Request, res: Response): Promise<void> => {
   try {
